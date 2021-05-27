@@ -34,7 +34,6 @@ class keymgr_base_vseq extends cip_base_vseq #(
 
   virtual task dut_init(string reset_kind = "HARD");
     super.dut_init();
-    cfg.keymgr_vif.init();
 
     delay_after_reset_before_access_csr();
 

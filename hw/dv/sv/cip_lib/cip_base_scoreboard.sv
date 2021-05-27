@@ -345,6 +345,30 @@ class cip_base_scoreboard #(type RAL_T = dv_base_reg_block,
     end
   endfunction
 
+  virtual task sample_resets();
+    if (cfg.has_edn && cfg.en_cov) begin
+
+      // Discard the first resets
+      wait(cfg.clk_rst_vif.rst_n && cfg.edn_clk_rst_vif.rst_n);
+      fork
+        // Sample edn_rst_ni
+        forever begin
+          @(negedge cfg.clk_rst_vif.rst_n);
+          cov.resets_cg.sample({1'b0, cfg.edn_clk_rst_vif.rst_n});
+          @(posedge cfg.clk_rst_vif.rst_n);
+          cov.resets_cg.sample({1'b1, cfg.edn_clk_rst_vif.rst_n});
+        end
+        // Sample default clk_rst_ni
+        forever begin
+          @(negedge cfg.edn_clk_rst_vif.rst_n);
+          cov.resets_cg.sample({cfg.clk_rst_vif.rst_n, 1'b0});
+          @(posedge cfg.edn_clk_rst_vif.rst_n);
+          cov.resets_cg.sample({cfg.clk_rst_vif.rst_n, 1'b1});
+        end
+      join_none
+    end
+  endtask
+
   virtual function void check_phase(uvm_phase phase);
     super.check_phase(phase);
     foreach (tl_a_chan_fifos[i]) `DV_EOT_PRINT_TLM_FIFO_CONTENTS(tl_seq_item, tl_a_chan_fifos[i])

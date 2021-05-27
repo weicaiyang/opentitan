@@ -291,6 +291,13 @@ interface keymgr_if(input clk, input rst_n);
     join
   end
 
+  initial begin
+    forever begin
+      @(posedge rst_n);
+      init();
+    end
+  end
+
   function automatic void check_invalid_key(keymgr_pkg::hw_key_req_t act_key, string key_name);
     if (rst_n && act_key.valid && !is_cmd_err && !is_fsm_err) begin
       foreach (keys_a_array[i, j]) begin
