@@ -35,6 +35,8 @@ module rv_core_ibex #(
   // Clock domain for escalation receiver
   input  logic        clk_esc_i,
   input  logic        rst_esc_ni,
+  // Reset feedback to clkmgr
+  output logic        rst_cpu_n_o,
 
   input  prim_ram_1p_pkg::ram_1p_cfg_t ram_cfg_i,
 
@@ -139,6 +141,9 @@ module rv_core_ibex #(
   logic [31:0] rvfi_mem_rdata;
   logic [31:0] rvfi_mem_wdata;
 `endif
+
+  // Reset feedback to clkmgr
+  assign rst_cpu_n_o = rst_ni;
 
   // Escalation receiver that converts differential
   // protocol into single ended signal.
