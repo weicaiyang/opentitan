@@ -33,6 +33,7 @@ IPS ?= aes           \
        pwrmgr        \
        rom_ctrl      \
        rstmgr        \
+       rv_dm         \
        rv_plic       \
        rv_timer      \
        sensor_ctrl   \
