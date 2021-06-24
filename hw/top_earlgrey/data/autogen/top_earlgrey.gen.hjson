@@ -6772,6 +6772,7 @@
           clock: clk_main_i
           reset: rst_main_ni
           inst_type: rv_plic
+          pipeline_byp: "false"
           addr_range:
           [
             {
@@ -6779,7 +6780,6 @@
               size_byte: 0x1000
             }
           ]
-          pipeline_byp: "false"
           xbar: false
           stub: false
           pipeline: "true"
