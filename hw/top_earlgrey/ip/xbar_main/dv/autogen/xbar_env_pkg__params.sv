@@ -98,7 +98,7 @@ tl_host_t xbar_hosts[$] = '{
         "kmac",
         "sram_ctrl_main"}}
     ,
-    '{"rv_dm.sba", 2, '{
+    '{"rv_dm__sba", 2, '{
         "rom_ctrl__rom",
         "rom_ctrl__regs",
         "rv_dm__regs",
