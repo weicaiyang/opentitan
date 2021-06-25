@@ -64,7 +64,7 @@ module rv_dm
   rv_dm_reg_pkg::rv_dm_regs_reg2hw_t regs_reg2hw;
   logic regs_intg_error, rom_intg_error;
 
-  rv_dm_regs_reg_top i_rv_dm_regs_reg_top (
+  rv_dm_regs_reg_top u_reg_regs (
     .clk_i,
     .rst_ni,
     .tl_i      (regs_tl_d_i    ),
@@ -74,7 +74,7 @@ module rv_dm
     .devmode_i (1'b1           )
   );
 
-  rv_dm_rom_reg_top u_rv_dm_rom_reg_top (
+  rv_dm_rom_reg_top u_reg_rom (
     .clk_i,
     .rst_ni,
     .tl_i      (rom_tl_d_i    ),
